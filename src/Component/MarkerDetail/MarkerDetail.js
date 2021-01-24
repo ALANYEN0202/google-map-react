@@ -25,6 +25,7 @@ const DetailIsOpening = styled.div`
   padding: 5px;
   margin: 5px 0px;
   border-radius: 8px;
+  text-align: center;
 `;
 const DetailOpenTime = styled.div`
   font-weight: bold;

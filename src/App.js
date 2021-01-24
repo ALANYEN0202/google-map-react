@@ -36,7 +36,6 @@ const SimpleMap = (props) => {
         location: myPosition,
         radius: 1000,
         type: searchType,
-        openNow: true,
       };
 
       service.nearbySearch(request, (results, status) => {

@@ -1,70 +1,104 @@
-# Getting Started with Create React App
+# 自製 Google map 附近商店搜尋系統
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+以 google map API 來當作練習使用 React 來去做前端介面。
 
-## Available Scripts
+功能介紹：
 
-In the project directory, you can run:
+![圖片](https://ibb.co/mN0JLsk)
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+一、移動時會自動搜尋附近商店
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+二、可更改搜尋種類
 
-### `npm test`
+三、可更改衛星與路面圖
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+四、搜尋欄有自動提示功能
 
-### `npm run build`
+五、點擊搜尋文字可以跳到該地點
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+六、點擊商店地標可看到商店詳細資訊
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# 如何使用：
 
-### `npm run eject`
+首先需要去 google 申請 google API key 來做往後 google API 的使用。
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+先去 [google 地圖網站](https://cloud.google.com/maps-platform/)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+點選地圖介面集以及地點介面集並且按繼續。
+觀看憑證有無 Maps API Key ，這組就是用來使用 google maps 相關功能的 API key 請保管好並且不要外洩。
+[相關申請教學](https://www.coderbridge.com/series/a98833b7bf4d43d38c7d541cf4cbe1b1/posts/c323dab93cad46f8bb632792c056ca66)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## ㄧ、 git clone 把專案下載到你的資料夾
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 二、 npm install 安裝所需套件
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 三、在 src 底下新增檔案 key.js
 
-### Code Splitting
+## 四、在 key.js 裡面 
+```js
+export const Key = '你的 Maps API Key';
+```
+## 五、npm start 即可使用
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+相關設定說明：
 
-### Analyzing the Bundle Size
+一、起始地圖畫面設定，在 src/App.js 檔案裡面有以下這段
+```js
+SimpleMap.defaultProps = {
+  center: {
+    lat: 25.0441443, // 你要初始的經緯度
+    lng: 121.5711905,// 你要初始的經緯度
+  },
+  zoom: 17, // 地圖的縮放比例
+};
+```
+如何取得經緯度可以打開 google map 搜尋你要的地點，可以看到網址列上 @ 後面到 z 的就是經緯度。
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+二、商店種類設置：
+請到 src/Component/SearchType/SearchTypeOptions.js 檔案裡面找到
+```js
+<SearchType
+  value="麵包店" // 想設置的名字
+  name="bakery" // 設置 google 提供的 place type
+  isOption={searchType === "bakery"} // 請把 “”裡面的值改為跟 name 一樣
+/>
+```
+請注意 **name的值只能填google提供的** 
 
-### Making a Progressive Web App
+[商店種類](https://developers.google.com/places/supported_types?hl=zh-TW)
+請看 Table 1: Place types 底下的英文單字都是可以使用的。
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+例如我要更改成搜尋圖書館 
+```js
+<SearchType
+  value="圖書館"
+  name="library"
+  isOption={searchType === "library"}
+/>
+```
+要新增只要把以上程式碼複製到下方即可
+```js
+<SearchType
+  value="麵包店" 
+  name="bakery"
+  isOption={searchType === "bakery"} 
+/>
 
-### Advanced Configuration
+<SearchType
+  value="圖書館"
+  name="library"
+  isOption={searchType === "library"}
+/>
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+附註： 
 
-### Deployment
+此作品來源為 [七天打造自己的 Google Map 應用入門](https://www.coderbridge.com/series/a98833b7bf4d43d38c7d541cf4cbe1b1)
+感謝如此詳細以及淺顯易懂的教學。
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+相關資源：
+[google-map-react](https://github.com/google-map-react/google-map-react)
