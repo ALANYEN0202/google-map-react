@@ -4,8 +4,7 @@
 
 功能介紹：
 
-![圖片](https://ibb.co/mN0JLsk)
-
+![圖片](https://i.ibb.co/QDk92BL/map.gif)
 
 一、移動時會自動搜尋附近商店
 
